@@ -1,0 +1,103 @@
+/* frontend/src/app/globals.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 240, 240, 245; /* Light gray-blue */
+  --background-end-rgb: 255, 255, 255;
+  --primary-color: 67, 56, 202; /* Indigo 700 */
+  --primary-light: 99, 102, 241; /* Indigo 500 */
+  --secondary-color: 124, 58, 237; /* Violet 600 */
+  --accent-color: 16, 185, 129; /* Emerald 500 */
+  --surface-color: 255, 255, 255;
+  --text-primary: 17, 24, 39; /* Gray 900 */
+  --text-secondary: 107, 114, 128; /* Gray 500 */
+  --border-radius: 12px;
+  --transition-speed: 0.4s;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 15, 23, 42; /* Dark blue-gray */
+    --background-end-rgb: 30, 41, 59;
+    --primary-color: 129, 140, 248; /* Lighter Indigo for dark mode */
+    --primary-light: 99, 102, 241;
+    --surface-color: 30, 41, 59;
+    --text-primary: 241, 245, 249; /* Light Gray 50 */
+    --text-secondary: 148, 163, 184; /* Light Gray 400 */
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: rgb(var(--text-primary));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+  min-height: 100vh;
+  /* --- Complex Animated Background --- */
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  /* Multiple radial gradients for a layered, 3D-ish effect */
+  background:
+    radial-gradient(ellipse at 20% 30%, rgba(67, 56, 202, 0.15) 0%, transparent 40%),
+    radial-gradient(ellipse at 80% 70%, rgba(124, 58, 237, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.1) 0%, transparent 30%);
+  background-size: 100vmax 100vmax, 80vmax 80vmax, 120vmax 120vmax;
+  background-position: -20vmax -20vmax, 60vmax 60vmax, 0 0;
+  animation:
+    bg-position-1 35s linear infinite alternate,
+    bg-position-2 45s linear infinite alternate,
+    bg-position-3 55s linear infinite alternate;
+  z-index: -1; /* Behind all content */
+  will-change: transform; /* Hint for smoother animation */
+}
+
+/* --- Background Animation Keyframes --- */
+@keyframes bg-position-1 {
+  0% { background-position: -20vmax -20vmax, 60vmax 60vmax, 0 0; }
+  100% { background-position: 20vmax 20vmax, 40vmax 40vmax, 20vmax 20vmax; }
+}
+@keyframes bg-position-2 {
+  0% { background-position: 60vmax 60vmax, -20vmax -20vmax, 20vmax 20vmax; }
+  100% { background-position: 40vmax 40vmax, 20vmax 20vmax, 0 0; }
+}
+@keyframes bg-position-3 {
+  0% { background-position: 0 0, 20vmax 20vmax, -20vmax -20vmax; }
+  100% { background-position: 20vmax 20vmax, 0 0, 60vmax 60vmax; }
+}
+
+
+/* Ensure MUI components inherit the body font */
+body, .MuiTypography-root {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif !important;
+}
+
+/* Optional: Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
